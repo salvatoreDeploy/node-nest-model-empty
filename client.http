@@ -1,0 +1,33 @@
+@baseUrl = http://localhost:3333
+@authToken = {{Authenticate.response.body.access_token}}
+
+# @name Create-account
+
+POST  {{baseUrl}}/account
+Content-Type: application/json
+
+{
+  "name": "Joe Doe",
+  "email": "joedoe@email.com",
+  "password": "123456"
+}
+
+###
+
+# @name Authenticate
+
+POST  {{baseUrl}}/sessions
+Content-Type: application/json
+
+{
+  "email": "joedoe@email.com",
+  "password": "123456"
+}
+
+###
+
+# @name Route Authenticated Test
+
+GET   {{baseUrl}}/rota-protected
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
